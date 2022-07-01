@@ -66,6 +66,10 @@
     text-align: left;
 }
 
+.container-layout{
+    display: flex;
+}
+
 @media (max-width: 830px){
     .btnMobile{
         display: block;
