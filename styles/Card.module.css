@@ -1,0 +1,14 @@
+.container{
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    
+    margin: 15px 0px 0px 15px;
+    padding: 15px;
+
+    border: 2px solid #ccc;
+}
+
+.container strong{
+    margin: 10px 0px;
+}
