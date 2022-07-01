@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.cards{
+    width: 100%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+}
+
+@media (max-width: 830px){
+    .container{
+        flex-direction: column;
+    }
+}
