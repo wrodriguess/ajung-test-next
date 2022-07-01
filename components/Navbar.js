@@ -1,9 +1,8 @@
 import {useState, useEffect} from 'react';
 import { FaAlignLeft, FaAngleRight, FaBars, FaAngleDown } from "react-icons/fa";
+import Link from 'next/link'
 
-import api from '../services/api';
-
-export default function Navbar({clickCategory}){
+export default function Navbar(){
     const [categories, setCategories] = useState([]);
     const [openSubMenu, setOpenSubMenu] = useState('');
 
@@ -12,10 +11,9 @@ export default function Navbar({clickCategory}){
     }, []);
 
     async function loadCategories(){
-        await api.get('/categories', {headers: {'appKey': 'yDY5qu106qdgj7iBJm9j1biHH8v7sTO6WPPe29vY'}})
-            .then(response => {
-                setCategories(response.data);
-            })
+        const res = await fetch('https://asia.ajung.site/api/categories', {headers: {'appKey': 'yDY5qu106qdgj7iBJm9j1biHH8v7sTO6WPPe29vY'}})
+        const data = await res.json();
+        setCategories(data)        
     }
 
     function ucfirst(text){
@@ -47,7 +45,7 @@ export default function Navbar({clickCategory}){
     }
 
     return(
-        <>
+        <div>
             <button className="btnMobile" onClick={toggleMenuMobile}><FaBars/></button>
 
             <nav className="nav">
@@ -71,12 +69,14 @@ export default function Navbar({clickCategory}){
                                     <ul className="subcat" id={`sub${category.id}`}>
                                         {category.categories.map(subcategory => (
                                             <li key={subcategory.id}>
-                                                <button className="button" onClick={() => {
-                                                                        clickCategory(subcategory.slug);
+                                                <Link href={`/category/${subcategory.slug}`}>
+                                                    <button className="button" onClick={() => {
+                                                                        // clickCategory();
                                                                         toggleMenuMobile();
                                                                     }}>
-                                                    {ucfirst(subcategory.name)}
-                                                </button>
+                                                        {ucfirst(subcategory.name)}
+                                                    </button>
+                                                </Link>
                                             </li>
                                         ))}
                                     </ul>
@@ -84,18 +84,20 @@ export default function Navbar({clickCategory}){
                             }
 
                             {category.categories.length == 0 &&
-                                <button className="button" onClick={() => {
-                                                        clickCategory(category.slug);
-                                                        toggleMenuMobile();
-                                                        toggleSubmenu();
-                                                    }}>
-                                    {ucfirst(category.name)}
-                                </button>
+                                <Link href={`/category/${category.slug}`}>
+                                    <button className="button" onClick={() => {
+                                                            // clickCategory(category.slug);
+                                                            toggleMenuMobile();
+                                                            toggleSubmenu();
+                                                        }}>
+                                        {ucfirst(category.name)}
+                                    </button>
+                                </Link>
                             }
                         </li>
                     ))}
                 </ul>
             </nav>   
-        </>
+        </div>
     )
 }
