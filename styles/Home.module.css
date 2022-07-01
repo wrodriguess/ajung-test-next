@@ -1,20 +1,16 @@
 .container{
+    width: calc(100vw - 250px);
+    height: 100vh;
+
     display: flex;
     flex-direction: row;
-}
-
-.cards{
-    width: 100%;
-    
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
-
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 830px){
     .container{
         flex-direction: column;
+        width: 100vw;
     }
 }
