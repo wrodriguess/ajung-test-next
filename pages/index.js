@@ -3,9 +3,7 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   return (
     <div className={styles.container}>
-      <div className="selectCategory">
-        <h2>Selecione uma categoria</h2>
-      </div>
+      <h2>Selecione uma categoria</h2>
     </div>
   )
 }
